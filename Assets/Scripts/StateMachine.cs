@@ -15,6 +15,7 @@ public class StateMachine<T>
     /// L'objet qui vas utiliser les états
     /// </summary>
     protected T _owner;
+    
     protected State<T> _currentState;
 
     public State<T> CurrentState {get => _currentState; set => setState(value);}
@@ -53,6 +54,10 @@ public class StateMachine<T>
 /// <typeparam name="T">Le type de l'objet de l'état</typeparam>
 public class State<T>
 {
+
+    /// <summary>
+    /// La state machine gérant les états de l'objet Owner
+    /// </summary>
     protected StateMachine<T> _stateMachine;
 
     /// <summary>
