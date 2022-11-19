@@ -18,14 +18,18 @@ namespace Player
         private float distToGround;
         
         private float _velocityY;
+        private float inputH;
+        private float inputV;
         private bool _jumpCancel;
         private bool _isGrounded;
+        private Animator animator;
 
         private Rigidbody rigidbody;
 
         private void Awake() {
             rigidbody = GetComponent<Rigidbody>();
             _velocityY = 0;
+            animator = GetComponent<Animator>();
             
             distToGround = 0f;
             // TODO : Modifier la valeur de DistToGround quand on aura le vrai personnage
@@ -60,13 +64,19 @@ namespace Player
                 move -= Camera.main.transform.forward;
             }
 
+            inputH = Input.GetAxis("Horizontal");
+            inputV = Input.GetAxis("Vertical");
+
             move.y = 0;
             move.Normalize();
+
+            animator.SetBool("Run", move != Vector3.zero);
+            animator.SetBool("IsGrounded", _isGrounded);
 
             if(move != Vector3.zero)
             {
                 float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle + 180, ref turnSmoothVel, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
 
@@ -74,11 +84,14 @@ namespace Player
             {
                 //rigidbody.AddForce(Vector3.up * jumpVel, ForceMode.Impulse);
                 StartCoroutine(Jump());
+                animator.SetTrigger("Jump");
                 
                 _canJump = _isGrounded;
             }
-            
+
             // Physique de la chute
+            animator.SetBool("Gliding", rigidbody.velocity.y <= 0 && !_isGrounded && Input.GetKey(KeyCode.Space));
+
             if (rigidbody.velocity.y <= 0 && !_isGrounded)
             {
                 var newVelocity = rigidbody.velocity;
@@ -87,8 +100,10 @@ namespace Player
                 rigidbody.velocity = newVelocity;
             }
 
+            var movement = new Vector3(inputH,move.y,inputV); 
+
             //rigidbody.AddForce(Vector3.down * curGravityVel * Time.deltaTime, ForceMode.Acceleration);
-            rigidbody.MovePosition(rigidbody.position + move * Time.deltaTime * moveSpeed);
+            rigidbody.MovePosition(rigidbody.position + movement * Time.deltaTime * moveSpeed);
             
         }
 
