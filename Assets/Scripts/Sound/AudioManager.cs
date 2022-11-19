@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
         public string name;
         public AudioClip clip;
 
+        public bool StartSoundPlaying = false;
+
         [Range(0f, 1f)]
         public float volume;
 
@@ -127,7 +129,10 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
-        Play(StartSound);
+        if (StartSoundPlaying === true)
+        {
+            Play(StartSound);
+        }
     }
 
 }
