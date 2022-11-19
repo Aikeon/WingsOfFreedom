@@ -9,6 +9,8 @@ namespace Player
     {
         [SerializeField] float moveSpeed = 20f;
         [SerializeField] float turnSmoothTime = 0.1f;
+        
+        // TODO : Passser les trois variables des sauts en privé une fois qu'on aura trouvé des valeurs qui nous conviennent
         [SerializeField] float usualGravityVel = 10f;
         [SerializeField] float glideGravityVel = 10f;
         [SerializeField] float jumpVel = 10f;
@@ -18,7 +20,6 @@ namespace Player
         private float distToGround;
         
         private float _velocityY;
-        private bool _jumpCancel;
         private bool _isGrounded;
 
         private Rigidbody rigidbody;
@@ -72,7 +73,6 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.Space) && _canJump)
             {
-                //rigidbody.AddForce(Vector3.up * jumpVel, ForceMode.Impulse);
                 StartCoroutine(Jump());
                 
                 _canJump = _isGrounded;
@@ -87,7 +87,6 @@ namespace Player
                 rigidbody.velocity = newVelocity;
             }
 
-            //rigidbody.AddForce(Vector3.down * curGravityVel * Time.deltaTime, ForceMode.Acceleration);
             rigidbody.MovePosition(rigidbody.position + move * Time.deltaTime * moveSpeed);
             
         }
@@ -96,11 +95,10 @@ namespace Player
         {
             var jumpProgress = 0f;
 
-            while (!_jumpCancel && jumpProgress < 0.5f)
+            while (jumpProgress < 0.5f)
             {
-                _velocityY = jumpVel * (1-jumpProgress)*(1-jumpProgress);
                 var newVelocity = rigidbody.velocity;
-                newVelocity.y = _velocityY;
+                newVelocity.y = jumpVel * (1-jumpProgress)*(1-jumpProgress);
 
                 rigidbody.velocity = newVelocity;
 
