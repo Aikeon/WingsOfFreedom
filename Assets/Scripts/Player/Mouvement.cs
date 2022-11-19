@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -58,5 +59,7 @@ namespace Player
             rigidbody.MovePosition(rigidbody.position + move * Time.deltaTime * moveSpeed);
             
         }
+
+
     }
 }
