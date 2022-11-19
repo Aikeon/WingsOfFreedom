@@ -7,7 +7,8 @@ public class ChangeScene : MonoBehaviour
     [SerializeField] private GameObject UIMenu;
     [SerializeField] private GameObject UIOptions;
     [SerializeField] private GameObject UICredits;
-    
+    [SerializeField] private GameObject UIPause;
+
     public void QuitGame()
     {
         Application.Quit ();
@@ -41,5 +42,18 @@ public class ChangeScene : MonoBehaviour
         UIMenu.SetActive(false);
         UICredits.SetActive(false);
         UIOptions.SetActive(false);
+    }
+
+    public void Pause()
+    {
+        UIPause.SetActive(true);
+    }
+
+    public void Reprendre()
+    {
+        UIMenu.SetActive(false);
+        UICredits.SetActive(false);
+        UIOptions.SetActive(false);
+        UIPause.SetActive(false);
     }
 }
