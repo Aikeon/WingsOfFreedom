@@ -31,19 +31,19 @@ public class StateMachine<T>
         if(_currentState == null)
             Debug.LogError("No state to execute");
         else
-            _currentState?.update();
+            _currentState?.Update();
     }
 
     public virtual void fixedUpdate() {
-        _currentState?.fixedUpdate();
+        _currentState?.FixedUpdate();
     }
 
     public void setState(State<T> newState)
     {
-        _currentState?.exit();
+        _currentState?.Exit();
 
         _currentState = newState;
-        newState?.enter();
+        newState?.Enter();
     }
 }
 
@@ -70,10 +70,10 @@ public class State<T>
         _stateMachine = stateMachine;
     }
 
-    public virtual void enter(){}
-    public virtual void exit(){}
-    public virtual void update(){}
-    public virtual void fixedUpdate(){}
+    public virtual void Enter(){}
+    public virtual void Exit(){}
+    public virtual void Update(){}
+    public virtual void FixedUpdate(){}
 
     public override string ToString()
     {
