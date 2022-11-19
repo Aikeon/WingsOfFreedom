@@ -129,7 +129,7 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
-        if (StartSoundPlaying === true)
+        if (StartSoundPlaying == true)
         {
             Play(StartSound);
         }
