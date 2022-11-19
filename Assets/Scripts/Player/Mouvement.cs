@@ -12,15 +12,10 @@ namespace Player
 
         private float turnSmoothVel;
 
-        private CharacterController charController;
-
-        public CharacterController CharController => charController;
-        public float MoveSpeed => moveSpeed;
-        public float TurnSmoothTime => turnSmoothTime;
-        public float GravityVel => gravityVel;
+        private Rigidbody rigidbody;
 
         private void Awake() {
-            charController = GetComponent<CharacterController>();
+            rigidbody = GetComponent<Rigidbody>();
         }
 
         public void Update()
@@ -50,17 +45,17 @@ namespace Player
             if(move != Vector3.zero)
             {
                 float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, TurnSmoothTime);
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
 
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                //Comment on jump je sais pas
+                rigidbody.AddForce(Vector3.up * jumpVel, ForceMode.Impulse);
             }
-            
-            move.y -= GravityVel * Time.deltaTime;
-            CharController.Move(move * Time.deltaTime * MoveSpeed);
+
+            rigidbody.AddForce(Vector3.down * gravityVel * Time.deltaTime, ForceMode.Acceleration);
+            rigidbody.MovePosition(rigidbody.position + move * Time.deltaTime * moveSpeed);
             
         }
     }
