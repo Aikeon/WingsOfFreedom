@@ -37,7 +37,10 @@ Material:
     m_Floats:
     - _BaseNoiseScale: 0.015
     - _BaseScrollSpeed: 7
-    - _CurvatureRadius: -190
+    - _CurvatureRadius: 250
+    - _FadeDepth: 197.8
+    - _FresnelIntensity: 1
+    - _FresnelPower: 8
     - _Height: 20
     - _NoiseScale: 0.03
     - _NoiseSmoothing1: -0.7
@@ -48,8 +51,8 @@ Material:
     - _ScrollSpeed: 15
     - _baseHeight: 2
     m_Colors:
-    - _HighColor: {r: 1.1353015, g: 1.1353015, b: 1.1353015, a: 0}
-    - _LowColor: {r: 0.219, g: 0.20683333, b: 0.18655555, a: 0}
+    - _HighColor: {r: 1.5157166, g: 1.5157166, b: 1.5157166, a: 0}
+    - _LowColor: {r: 0.41477647, g: 0.76314443, b: 0.8862745, a: 0}
     - _NoiseRemap: {r: 0, g: 1, b: -1, a: 0}
     - _NoiseRemapIn: {r: 0, g: 1, b: 0, a: 0}
     - _NoiseRemapOut: {r: -0.3, g: 2, b: 0, a: 0}
