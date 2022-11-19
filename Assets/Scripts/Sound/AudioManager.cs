@@ -10,14 +10,14 @@ public class AudioManager : MonoBehaviour
 {
     public String StartSound = "";
 
+    public bool StartSoundPlaying = false;
+
     [System.Serializable]
     public class Sound
     {
         public string name;
         public AudioClip clip;
-
-        public bool StartSoundPlaying = false;
-
+        
         [Range(0f, 1f)]
         public float volume;
 
