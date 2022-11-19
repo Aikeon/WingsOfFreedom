@@ -38,6 +38,8 @@ public class ChangeScene : MonoBehaviour
     
     public void Play()
     {
-        
+        UIMenu.SetActive(false);
+        UICredits.SetActive(false);
+        UIOptions.SetActive(false);
     }
 }
