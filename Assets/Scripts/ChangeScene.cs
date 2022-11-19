@@ -49,6 +49,12 @@ public class ChangeScene : MonoBehaviour
         UIPause.SetActive(true);
     }
 
+    public void LoadMenu()
+    {
+        UIPause.SetActive(false);
+        UIMenu.SetActive(true);
+    }
+
     public void Reprendre()
     {
         UIMenu.SetActive(false);
