@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Player
@@ -56,12 +57,14 @@ namespace Player
 
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                //Comment on jump je sais pas
+                Rigidbody.AddForce();
             }
             
             move.y -= GravityVel * Time.deltaTime;
             CharController.Move(move * Time.deltaTime * MoveSpeed);
             
         }
+
+
     }
 }

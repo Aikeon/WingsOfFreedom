@@ -79,7 +79,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-
+        Debug.Log("son " + name + " joué");
         s.source.Play();
 
     }
