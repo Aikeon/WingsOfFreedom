@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 1995fc1c07646a54799c80b25003c2c6, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.32014108, g: 0.2586147, b: 0.36836863, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1040,6 +1040,7 @@ MonoBehaviour:
   UIMenu: {fileID: 2035450751}
   UIOptions: {fileID: 457752410}
   UICredits: {fileID: 1606164785}
+  UIPause: {fileID: 0}
 --- !u!114 &266261411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3278,6 +3279,7 @@ MonoBehaviour:
   UIMenu: {fileID: 2035450751}
   UIOptions: {fileID: 457752410}
   UICredits: {fileID: 1606164785}
+  UIPause: {fileID: 0}
 --- !u!114 &1161820731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4077,6 +4079,7 @@ MonoBehaviour:
   UIMenu: {fileID: 2035450751}
   UIOptions: {fileID: 457752410}
   UICredits: {fileID: 1606164785}
+  UIPause: {fileID: 0}
 --- !u!114 &1454996708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4794,6 +4797,7 @@ MonoBehaviour:
   UIMenu: {fileID: 2035450751}
   UIOptions: {fileID: 457752410}
   UICredits: {fileID: 1606164785}
+  UIPause: {fileID: 0}
 --- !u!114 &1752717830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4944,6 +4948,7 @@ MonoBehaviour:
   UIMenu: {fileID: 2035450751}
   UIOptions: {fileID: 457752410}
   UICredits: {fileID: 1606164785}
+  UIPause: {fileID: 0}
 --- !u!114 &1756294520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5516,6 +5521,7 @@ MonoBehaviour:
   UIMenu: {fileID: 0}
   UIOptions: {fileID: 0}
   UICredits: {fileID: 0}
+  UIPause: {fileID: 0}
 --- !u!114 &2081494325
 MonoBehaviour:
   m_ObjectHideFlags: 0

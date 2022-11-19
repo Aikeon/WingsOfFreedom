@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,11 +43,6 @@ public class ChangeScene : MonoBehaviour
         UIMenu.SetActive(false);
         UICredits.SetActive(false);
         UIOptions.SetActive(false);
-    }
-
-    public void Pause()
-    {
-        UIPause.SetActive(true);
     }
 
     public void LoadMenu()
