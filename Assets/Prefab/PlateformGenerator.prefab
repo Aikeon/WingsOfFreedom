@@ -121,6 +121,10 @@ MonoBehaviour:
     heightToChange: 0
     distance: 15
     structureToUse: {fileID: 900935076955660823}
+  - functionUsedName: JumpAndPlane
+    heightToChange: -20
+    distance: 35
+    structureToUse: {fileID: 7639561788065257554}
   minHeight: -12
   maxHeight: 50
   minOfPlateform: 10

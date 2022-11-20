@@ -145,17 +145,17 @@ namespace PlateformGenerator
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKey(KeyCode.I))
-            {
-                if (!isInit)
-                    InitFirstPillar();
-                else
-                    CreatePillar();
-            }
-            if (Input.GetKey(KeyCode.O))
-            {
-                Reset();
-            }
+            // if (Input.GetKey(KeyCode.I))
+            // {
+            //     if (!isInit)
+            //         InitFirstPillar();
+            //     else
+            //         CreatePillar();
+            // }
+            // if (Input.GetKey(KeyCode.O))
+            // {
+            //     Reset();
+            // }
         }
     }
 }
