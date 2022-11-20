@@ -32,13 +32,15 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            freelook = gameCam.GetComponent<Cinemachine.CinemachineFreeLook>();
         }
     }
 
     void Update()
     {
-        Debug.Log(Mathf.Acos(Vector2.Angle(Vector2.right, (new Vector2(-icare.transform.position.y + lueur.transform.position.y, -icare.transform.position.x + lueur.transform.position.x)).normalized)));
-        freelook.m_XAxis.m_InputAxisValue = Mathf.Acos(Vector2.Angle(Vector2.right, (new Vector2(-icare.transform.position.y + lueur.transform.position.y, -icare.transform.position.x + lueur.transform.position.x)).normalized));
+        var dir = (icare.transform.position - lueur.transform.position).normalized;
+        freelook.m_XAxis.Value = Mathf.Asin(-dir.x)*Mathf.Rad2Deg + 180;
+        freelook.m_YAxis.Value = Mathf.Lerp(0,1,(3*dir.y+1)/2);
     }
 
     // Update is called once per frame
