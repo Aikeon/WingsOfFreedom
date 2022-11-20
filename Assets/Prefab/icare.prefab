@@ -1480,7 +1480,7 @@ MonoBehaviour:
   usualGravityVel: 60
   glideGravityVel: 5
   jumpVel: 25
-  sensitivity: 0.1
+  worldDir: 1
 --- !u!95 &919132149302061047
 Animator:
   serializedVersion: 4

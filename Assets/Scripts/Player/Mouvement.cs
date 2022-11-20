@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] float usualGravityVel = 10f;
         [SerializeField] float glideGravityVel = 10f;
         [SerializeField] float jumpVel = 10f;
+        [SerializeField] bool worldDir;
 
         private float turnSmoothVel;
         private float distToGround;
@@ -43,19 +44,19 @@ namespace Player
 
             if(Input.GetKey(KeyCode.Q))
             {
-                move -= Camera.main.transform.right;
+                move -= worldDir ? Vector3.right : Camera.main.transform.right;
             }
             if(Input.GetKey(KeyCode.D))
             {
-                move += Camera.main.transform.right;
+                move += worldDir ? Vector3.right : Camera.main.transform.right;
             }
             if(Input.GetKey(KeyCode.Z))
             {
-                move += Camera.main.transform.forward;
+                move += worldDir ? Vector3.forward : Camera.main.transform.forward;
             }
             if(Input.GetKey(KeyCode.S))
             {
-                move -= Camera.main.transform.forward;
+                move -= worldDir ? Vector3.forward : Camera.main.transform.forward;
             }
 
             inputH = Input.GetAxis("Horizontal");
