@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject lueur;
     [SerializeField] GameObject icare;
     [SerializeField] bool debugMode;
+    private Cinemachine.CinemachineFreeLook freelook;
     public bool seeing;
     [SerializeField] string[] dialogs;
     [SerializeField] TextMeshProUGUI manText;
@@ -32,6 +33,12 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    void Update()
+    {
+        Debug.Log(Mathf.Acos(Vector2.Angle(Vector2.right, (new Vector2(-icare.transform.position.y + lueur.transform.position.y, -icare.transform.position.x + lueur.transform.position.x)).normalized)));
+        freelook.m_XAxis.m_InputAxisValue = Mathf.Acos(Vector2.Angle(Vector2.right, (new Vector2(-icare.transform.position.y + lueur.transform.position.y, -icare.transform.position.x + lueur.transform.position.x)).normalized));
     }
 
     // Update is called once per frame
