@@ -9,6 +9,6 @@ public class HeadLookAt : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ChangeScene.seeing) transform.LookAt(target);
+        if (GameManager.Instance.seeing) transform.LookAt(target);
     }
 }
