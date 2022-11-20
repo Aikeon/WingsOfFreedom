@@ -52,7 +52,7 @@ Material:
     - _baseHeight: 2
     m_Colors:
     - _HighColor: {r: 1.5157166, g: 1.5157166, b: 1.5157166, a: 0}
-    - _LowColor: {r: 0.41568628, g: 0.6232258, b: 0.8862745, a: 0}
+    - _LowColor: {r: 0.8773391, g: 0.41568628, b: 0.8862745, a: 0}
     - _NoiseRemap: {r: 0, g: 1, b: -1, a: 0}
     - _NoiseRemapIn: {r: 0, g: 1, b: 0, a: 0}
     - _NoiseRemapOut: {r: -0.3, g: 2, b: 0, a: 0}

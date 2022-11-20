@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 namespace PlateformGenerator
 {
@@ -12,6 +14,19 @@ namespace PlateformGenerator
         private bool isInit = false;
         private List<GameObject> plateformsList;
         private Vector3 lastPosition;
+        private Random random = new Random();
+        
+        [System.Serializable]
+        public class PlateformType
+        {
+            public String functionUsedName;
+            public float heightToChange;
+            public float distance;
+        }
+        
+        public List<PlateformType> listOfPlateformUsable;
+        public float minHeight = -12.0f;
+        public float maxHeight = 50.0f;
 
     // Start is called before the first frame update
         void Start()
@@ -41,15 +56,57 @@ namespace PlateformGenerator
             plateformsList.Add(go);
         }
         
+        // Shuffle for a template of Pillar
+        // ReSharper disable Unity.PerformanceAnalysis
+        PlateformType ShuffleForNewPillar()
+        {
+            int i = 0;
+            
+            while (true)
+            {
+                i++;
+                if (i == 10)
+                {
+                    UnityEngine.Debug.Log("Hello, this is a fail");
+                    return listOfPlateformUsable[0];
+                }
+                int index = random.Next(listOfPlateformUsable.Count);
+                PlateformType nextPlateform = listOfPlateformUsable[index];
+
+                if (   nextPlateform.heightToChange + lastPosition.y >= minHeight
+                    && nextPlateform.heightToChange + lastPosition.y <= maxHeight) {
+                    return listOfPlateformUsable[index];
+                }
+                else
+                {
+                    UnityEngine.Debug.Log("heightToChange " + nextPlateform.heightToChange + " lastPosition.y " + lastPosition.y);
+                    if (!(nextPlateform.heightToChange + lastPosition.y >= minHeight))
+                    {
+                        UnityEngine.Debug.Log("1 = " + (nextPlateform.heightToChange + lastPosition.y >= minHeight) + ", due to : " + "heightToChange " + nextPlateform.heightToChange + " lastPosition.y " + lastPosition.y + "!>= min height " + minHeight);
+
+                    }
+
+                    if (!(nextPlateform.heightToChange + lastPosition.y <= maxHeight))
+                    {
+                        UnityEngine.Debug.Log("2 = " + (nextPlateform.heightToChange + lastPosition.y <= maxHeight) + ", due to : " + "heightToChange " + nextPlateform.heightToChange + " lastPosition.y " + lastPosition.y + "!<= maxHeight " + maxHeight);
+                    }
+                }
+            }
+        }
+            
         // Create a new Pillar
         void CreatePillar()
         {
             GameObject lastPillar = plateformsList.First();
             GameObject go = GameObject.Instantiate(basicStructure, basicStructure.transform.parent);
             Vector3 newPosition = lastPosition;
+            
+            // 
+            PlateformType newPlateformType = ShuffleForNewPillar();
 
             // CALCULATE NEW POS
-            newPosition.z += 10.0f;
+            newPosition.z += newPlateformType.distance;
+            newPosition.y += newPlateformType.heightToChange;
             
             // SET OBJECT AND INFO
             go.transform.SetPositionAndRotation(newPosition, lastPillar.transform.rotation);

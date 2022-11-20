@@ -45,6 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicStructure: {fileID: 7440583577961259176}
+  listOfPlateformUsable:
+  - functionUsedName: JumpToHigherPlace
+    heightToChange: 5
+    distance: 16
+  - functionUsedName: GetDow
+    heightToChange: -5
+    distance: 8
+  - functionUsedName: JumpForSameHeightPlateform
+    heightToChange: 0
+    distance: 20
 --- !u!1 &7440583577807797431
 GameObject:
   m_ObjectHideFlags: 0
