@@ -1481,6 +1481,7 @@ MonoBehaviour:
   glideGravityVel: 5
   jumpVel: 25
   worldDir: 1
+  minHeight: 0
 --- !u!95 &919132149302061047
 Animator:
   serializedVersion: 4
