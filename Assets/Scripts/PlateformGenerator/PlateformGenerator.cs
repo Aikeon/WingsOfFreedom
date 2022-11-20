@@ -108,10 +108,6 @@ namespace PlateformGenerator
             {
                 newPos.z += newPlateformType.distance * (float) Math.Cos(angle);
                 newPos.x += newPlateformType.distance * (float) Math.Sin(angle);
-                UnityEngine.Debug.Log("newPos.z: " + newPos.z + " newPos.x " + newPos.x);
-                UnityEngine.Debug.Log("newPlateformType.distance: " + newPlateformType.distance + " angle " + angle);
-                UnityEngine.Debug.Log("Math.Cos(angle): " + Math.Cos(angle) + " Math.Sin(angle) " + Math.Sin(angle));
-                
             }
             
 
