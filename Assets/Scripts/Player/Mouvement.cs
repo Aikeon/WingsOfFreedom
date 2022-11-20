@@ -14,7 +14,10 @@ namespace Player
         [SerializeField] float usualGravityVel = 10f;
         [SerializeField] float glideGravityVel = 10f;
         [SerializeField] float jumpVel = 10f;
+        [SerializeField] private float dashDistance = 10f;
+        
         [SerializeField] bool worldDir;
+        
 
         [SerializeField] private float minHeight = 160f;
 
@@ -23,8 +26,9 @@ namespace Player
         
         private float inputH;
         private float inputV;
-        private bool _jumpCancel;
         private bool _isGrounded;
+        private bool _canDash;
+        
         private Animator animator;
 
         private Rigidbody rigidbody;
@@ -48,6 +52,7 @@ namespace Player
             if (_isGrounded)
             {
                 _lastSafePosition = transform.position;
+                _canDash = true;
             }
             
             // Tp du joueur en sécurité si il est tombé trop bas
@@ -96,6 +101,14 @@ namespace Player
                 StartCoroutine(Jump());
                 animator.SetTrigger("Jump");
             }
+            
+            // Lancement du dash
+            if (Input.GetKeyDown(KeyCode.RightShift) && _canDash)
+            {
+                StartCoroutine(Dash());
+                animator.SetTrigger("Dash");
+                _canDash = false;
+            }
 
             // Physique de la chute
             animator.SetBool("Gliding", rigidbody.velocity.y <= 0 && !_isGrounded && Input.GetKey(KeyCode.Space));
@@ -132,6 +145,33 @@ namespace Player
 
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
             
+            yield return null;
+        }
+
+        IEnumerator Dash()
+        {
+            var dashProgress = 0f;
+
+            while (dashProgress < 0.5f)
+            {
+                var newVelocity = rigidbody.velocity;
+
+                var directions = new Vector2(
+                    Vector3.Dot(transform.forward, Vector3.right),
+                    Vector3.Dot(transform.forward, Vector3.forward)
+                );
+
+                newVelocity = new Vector3(-directions.x * dashDistance * (1 - dashProgress) * (1 - dashProgress),
+                                            newVelocity.y, 
+                                            -directions.y * dashDistance * (1 - dashProgress) * (1 - dashProgress));
+
+                rigidbody.velocity = newVelocity;
+                dashProgress += Time.deltaTime;
+                yield return null;
+
+            }
+
+            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
             yield return null;
         }
 
