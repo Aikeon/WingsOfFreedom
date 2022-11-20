@@ -108,10 +108,6 @@ namespace PlateformGenerator
             {
                 newPos.z += newPlateformType.distance * (float) Math.Cos(angle);
                 newPos.x += newPlateformType.distance * (float) Math.Sin(angle);
-                UnityEngine.Debug.Log("newPos.z: " + newPos.z + " newPos.x " + newPos.x);
-                UnityEngine.Debug.Log("newPlateformType.distance: " + newPlateformType.distance + " angle " + angle);
-                UnityEngine.Debug.Log("Math.Cos(angle): " + Math.Cos(angle) + " Math.Sin(angle) " + Math.Sin(angle));
-                
             }
             
 
@@ -145,17 +141,17 @@ namespace PlateformGenerator
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKey(KeyCode.I))
-            {
-                if (!isInit)
-                    InitFirstPillar();
-                else
-                    CreatePillar();
-            }
-            if (Input.GetKey(KeyCode.O))
-            {
-                Reset();
-            }
+            // if (Input.GetKey(KeyCode.I))
+            // {
+            //     if (!isInit)
+            //         InitFirstPillar();
+            //     else
+            //         CreatePillar();
+            // }
+            // if (Input.GetKey(KeyCode.O))
+            // {
+            //     Reset();
+            // }
         }
     }
 }
