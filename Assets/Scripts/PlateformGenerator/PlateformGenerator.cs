@@ -96,7 +96,9 @@ namespace PlateformGenerator
             Vector3 newPos = lastPosition;
 
             // Set new X and Z pos
-            int angle = random.Next(60) - 30;
+            double angle = random.Next(90) - 45;
+
+            angle = angle * (Math.PI / 180);
 
             if (angle == 0)
             {
@@ -107,7 +109,7 @@ namespace PlateformGenerator
                 newPos.z += newPlateformType.distance * (float) Math.Cos(angle);
                 newPos.x += newPlateformType.distance * (float) Math.Sin(angle);
                 UnityEngine.Debug.Log("newPos.z: " + newPos.z + " newPos.x " + newPos.x);
-                UnityEngine.Debug.Log("newPlateformType.distance: " + newPlateformType.distance);
+                UnityEngine.Debug.Log("newPlateformType.distance: " + newPlateformType.distance + " angle " + angle);
                 UnityEngine.Debug.Log("Math.Cos(angle): " + Math.Cos(angle) + " Math.Sin(angle) " + Math.Sin(angle));
                 
             }
