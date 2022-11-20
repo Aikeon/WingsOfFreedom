@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 using Random = System.Random;
 
 namespace PlateformGenerator
@@ -89,21 +90,48 @@ namespace PlateformGenerator
             }
         }
             
+        // get new position for the next pillar
+        public Vector3 GetNewPosition(PlateformType newPlateformType)
+        {
+            Vector3 newPos = lastPosition;
+
+            // Set new X and Z pos
+            int angle = random.Next(60) - 30;
+
+            if (angle == 0)
+            {
+                newPos.z += newPlateformType.distance;
+            }
+            else
+            {
+                newPos.z += newPlateformType.distance * (float) Math.Cos(angle);
+                newPos.x += newPlateformType.distance * (float) Math.Sin(angle);
+                UnityEngine.Debug.Log("newPos.z: " + newPos.z + " newPos.x " + newPos.x);
+                UnityEngine.Debug.Log("newPlateformType.distance: " + newPlateformType.distance);
+                UnityEngine.Debug.Log("Math.Cos(angle): " + Math.Cos(angle) + " Math.Sin(angle) " + Math.Sin(angle));
+                
+            }
+            
+
+            // Change height
+            newPos.y += newPlateformType.heightToChange;
+            
+            return newPos;
+        }
+        
         // Create a new Pillar
         public void CreatePillar()
         {
             GameObject lastPillar = plateformsList.First();
-            Vector3 newPosition = lastPosition;
             
             // Random For new plateform
             PlateformType newPlateformType = ShuffleForNewPillar();
+            
+            // calculate new position for pillar
+            Vector3 newPosition = GetNewPosition(newPlateformType);
 
             // Instantiate good gameobject
             GameObject go = GameObject.Instantiate(newPlateformType.structureToUse, newPlateformType.structureToUse.transform.parent);
-            
-            // CALCULATE NEW POS
-            newPosition.z += newPlateformType.distance;
-            newPosition.y += newPlateformType.heightToChange;
             
             // SET OBJECT AND INFO
             go.transform.SetPositionAndRotation(newPosition, lastPillar.transform.rotation);
