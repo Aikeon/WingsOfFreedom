@@ -14,12 +14,11 @@ namespace Player
         [SerializeField] float usualGravityVel = 10f;
         [SerializeField] float glideGravityVel = 10f;
         [SerializeField] float jumpVel = 10f;
+        [SerializeField] bool worldDir;
 
         private float turnSmoothVel;
-        private bool _canJump = true;
         private float distToGround;
         
-        private float _velocityY;
         private float inputH;
         private float inputV;
         private bool _jumpCancel;
@@ -30,7 +29,6 @@ namespace Player
 
         private void Awake() {
             rigidbody = GetComponent<Rigidbody>();
-            _velocityY = 0;
             animator = GetComponent<Animator>();
             
             distToGround = 0f;
@@ -42,28 +40,23 @@ namespace Player
             
             _isGrounded = Physics.Raycast(transform.position + 0.01f * Vector3.up, -Vector3.up, distToGround + 0.1f);
 
-            if (_isGrounded)
-            {
-                _canJump = true;
-            }
-
             Vector3 move = Vector3.zero;
 
             if(Input.GetKey(KeyCode.Q))
             {
-                move -= Camera.main.transform.right;
+                move -= worldDir ? Vector3.right : Camera.main.transform.right;
             }
             if(Input.GetKey(KeyCode.D))
             {
-                move += Camera.main.transform.right;
+                move += worldDir ? Vector3.right : Camera.main.transform.right;
             }
             if(Input.GetKey(KeyCode.Z))
             {
-                move += Camera.main.transform.forward;
+                move += worldDir ? Vector3.forward : Camera.main.transform.forward;
             }
             if(Input.GetKey(KeyCode.S))
             {
-                move -= Camera.main.transform.forward;
+                move -= worldDir ? Vector3.forward : Camera.main.transform.forward;
             }
 
             inputH = Input.GetAxis("Horizontal");
@@ -82,12 +75,10 @@ namespace Player
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && _canJump)
+            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
                 StartCoroutine(Jump());
                 animator.SetTrigger("Jump");
-                
-                _canJump = _isGrounded;
             }
 
             // Physique de la chute
