@@ -27,6 +27,8 @@ namespace PlateformGenerator
         public List<PlateformType> listOfPlateformUsable;
         public float minHeight = -12.0f;
         public float maxHeight = 50.0f;
+        
+        public int minOfPlateform = 10;
 
     // Start is called before the first frame update
         void Start()
@@ -55,6 +57,11 @@ namespace PlateformGenerator
             
             go.SetActive(true);
             plateformsList.Add(go);
+
+            for (int i = 0; i < minOfPlateform; i++)
+            {
+                CreatePillar();
+            }
         }
         
         // Shuffle for a template of Pillar
