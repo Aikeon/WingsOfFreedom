@@ -16,6 +16,8 @@ namespace Player
         [SerializeField] float jumpVel = 10f;
         [SerializeField] bool worldDir;
 
+        [SerializeField] private float minHeight = 160f;
+
         private float turnSmoothVel;
         private float distToGround;
         
@@ -26,6 +28,8 @@ namespace Player
         private Animator animator;
 
         private Rigidbody rigidbody;
+        
+        private Vector3 _lastSafePosition;
 
         private void Awake() {
             rigidbody = GetComponent<Rigidbody>();
@@ -37,9 +41,21 @@ namespace Player
 
         public void Update()
         {
-            
-            _isGrounded = Physics.Raycast(transform.position + 0.01f * Vector3.up, -Vector3.up, distToGround + 0.1f);
 
+            _isGrounded = Physics.Raycast(transform.position + 0.01f * Vector3.up, -Vector3.up, distToGround + 0.1f);
+            
+            // Sauvegarde de la position du joueur si il est au sol
+            if (_isGrounded)
+            {
+                _lastSafePosition = transform.position;
+            }
+            
+            // Tp du joueur en sécurité si il est tombé trop bas
+            if (transform.position.y < minHeight)
+            {
+                transform.position = _lastSafePosition;
+            }
+            
             Vector3 move = Vector3.zero;
 
             if(Input.GetKey(KeyCode.Q))
