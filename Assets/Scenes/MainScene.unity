@@ -4737,17 +4737,17 @@ PrefabInstance:
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
       propertyPath: distMult
-      value: 5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
       propertyPath: speedCap
-      value: 30
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
       propertyPath: baseSpeed
-      value: 20
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}

@@ -101,8 +101,8 @@ namespace PlateformGenerator
 
             var dist = newPlateformType.distance * UnityEngine.Random.Range(0.7f,1.5f);
 
-            angle = (newPos.x + dist * (float) Math.Sin(angle) > XBound) ? Mathf.Asin((XBound - newPos.x)/dist): angle;
-            angle = (newPos.x + dist * (float) Math.Sin(angle) < -XBound) ? -Mathf.Asin((-XBound - newPos.x)/dist): angle;
+            angle = (newPos.x + dist * (float) Math.Sin(angle) > XBound) ? angle - 45: angle;
+            angle = (newPos.x + dist * (float) Math.Sin(angle) < -XBound) ? angle + 45: angle;
             angle *= Mathf.PI / 180;
 
             if (angle == 0)
@@ -118,7 +118,6 @@ namespace PlateformGenerator
 
             // Change height
             newPos.y += newPlateformType.heightToChange;
-            
             return newPos;
         }
         

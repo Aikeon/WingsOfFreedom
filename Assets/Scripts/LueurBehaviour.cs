@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class LueurBehaviour : MonoBehaviour
 {
     [SerializeField] Transform player;
-    [SerializeField] float baseSpeed;
     [SerializeField] float speedCap;
     [SerializeField] float distMult;
     [SerializeField] GameObject endView;
@@ -21,13 +20,21 @@ public class LueurBehaviour : MonoBehaviour
     private string line2_3;
     private string line2_4;
     private string line3;
+    private float Xr;
+    private float Yr;
 
     // Update is called once per frame
     void Update()
     {
-        var distSpeed = distMult / Mathf.Abs(transform.position.z - player.transform.position.z);
-        var trueSpeed = Mathf.Min(baseSpeed * Time.deltaTime * distSpeed, speedCap * Time.deltaTime);
-        transform.position += Vector3.forward * trueSpeed;
+        var distSpeed = 1 + distMult / Mathf.Abs(transform.position.z - player.transform.position.z);
+        var trueSpeed = Mathf.Min(distSpeed, speedCap);
+        Debug.Log(trueSpeed);
+        Xr += Random.Range((transform.position.x > -10) ? -3 : 0,(transform.position.x < 10) ? 3 : 0)*Time.deltaTime;
+        Yr += Random.Range((transform.position.y > 21) ? -3 : 0,(transform.position.y < 35) ? 3 : 0)*Time.deltaTime;
+        Xr = Mathf.Clamp(Xr,-10,10);
+        Yr = Mathf.Clamp(Yr,-10,10);
+        transform.position += Vector3.forward * trueSpeed * Time.deltaTime;
+        transform.position += Time.deltaTime * (Vector3.up * Yr + Vector3.right * Xr);
         line1 = "A cet instant, il est bel et bien devenu l'homme le plus heureux du monde.";
         line2_1 = "Les rumeurs étaient donc vraies, mais";
         line2_2 = "... ";
@@ -57,6 +64,7 @@ public class LueurBehaviour : MonoBehaviour
         }
 
         GameManager.Instance.audioManager.Stop("Musique");
+        GameManager.Instance.audioManager.Stop("WindGliding");
         endView.SetActive(true);
         GameManager.Instance.icare.GetComponent<Player.Mouvement>().enabled = false;
         GameManager.Instance.lueur.GetComponent<LueurBehaviour>().enabled = false;
@@ -139,11 +147,12 @@ public class LueurBehaviour : MonoBehaviour
         var lastSeconds = 0f;
         while (lastSeconds < 4f)
         {
-            GameManager.Instance.menuCam.position += Vector3.up * 0.5f * (1 + lastSeconds);
+            GameManager.Instance.menuCam.position += Vector3.up * lastSeconds * Time.deltaTime;
             lastSeconds += Time.deltaTime;
             yield return null;
         }
 
+        //TODO Potentiel fondu
 
         SceneManager.LoadScene("MainScene");
     }

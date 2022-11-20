@@ -24,16 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Instance != null)
-        {
-            DestroyImmediate(gameObject);
-        }
-        else 
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            freelook = gameCam.GetComponent<Cinemachine.CinemachineFreeLook>();
-        }
+        Instance = this;
     }
 
     void Update()
