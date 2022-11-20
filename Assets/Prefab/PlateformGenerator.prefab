@@ -55,6 +55,8 @@ MonoBehaviour:
   - functionUsedName: JumpForSameHeightPlateform
     heightToChange: 0
     distance: 20
+  minHeight: -12
+  maxHeight: 50
 --- !u!1 &7440583577807797431
 GameObject:
   m_ObjectHideFlags: 0
