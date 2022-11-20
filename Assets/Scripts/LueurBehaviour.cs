@@ -147,7 +147,7 @@ public class LueurBehaviour : MonoBehaviour
         var lastSeconds = 0f;
         while (lastSeconds < 4f)
         {
-            GameManager.Instance.menuCam.position += Vector3.up * lastSeconds * Time.deltaTime;
+            GameManager.Instance.menuCam.position += Vector3.up * lastSeconds * 0.3f * Time.deltaTime;
             lastSeconds += Time.deltaTime;
             yield return null;
         }
