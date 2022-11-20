@@ -28,16 +28,22 @@ namespace Player
         private float inputV;
         private bool _isGrounded;
         private bool _canDash;
-        
+        private bool _gliding;
+        private bool _jumping;
+        private bool _landed;
+
         private Animator animator;
 
         private Rigidbody rigidbody;
         
         private Vector3 _lastSafePosition;
 
+        private AudioManager _audioManager;
+
         private void Awake() {
             rigidbody = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
+            _audioManager = GetComponentInChildren<AudioManager>();
             
             distToGround = 0f;
             // TODO : Modifier la valeur de DistToGround quand on aura le vrai personnage
@@ -53,9 +59,22 @@ namespace Player
             {
                 _lastSafePosition = transform.position;
                 _canDash = true;
+                if (_gliding)
+                {
+                    _audioManager.Stop("WindGliding");
+                    _gliding = false;
+                }
+
+                if (_landed)
+                {
+                    _audioManager.Play("Landing");
+                }
+
             }
-            
-            // Tp du joueur en sécurité si il est tombé trop bas
+
+            _landed = !_isGrounded;
+
+                // Tp du joueur en sécurité si il est tombé trop bas
             if (transform.position.y < minHeight)
             {
                 transform.position = _lastSafePosition;
@@ -99,31 +118,46 @@ namespace Player
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
                 StartCoroutine(Jump());
+                _jumping = true;
+                _audioManager.Play("Jump");
                 animator.SetTrigger("Jump");
             }
             
             // Lancement du dash
             if (Input.GetKeyDown(KeyCode.RightShift) && _canDash)
             {
-                StartCoroutine(Dash());
                 animator.SetTrigger("Dash");
+                StartCoroutine(Dash());
+                _audioManager.Play("Dash");
                 _canDash = false;
             }
 
             // Physique de la chute
             animator.SetBool("Gliding", rigidbody.velocity.y <= 0 && !_isGrounded && Input.GetKey(KeyCode.Space));
 
-            if (rigidbody.velocity.y <= 0 && !_isGrounded)
+            if (!_jumping && !_isGrounded)
             {
                 var newVelocity = rigidbody.velocity;
                 newVelocity.y = Math.Max(newVelocity.y - 60 * Time.deltaTime, (Input.GetKey(KeyCode.Space)) ? (-glideGravityVel) : (-usualGravityVel));
+
+                if (!_gliding && Input.GetKey(KeyCode.Space))
+                {
+                    _audioManager.Play("Glide");
+                    _audioManager.Play("WindGliding");
+                    _gliding = true;
+                }
+
+                if (_gliding && !Input.GetKey(KeyCode.Space))
+                {
+                    _audioManager.Stop("WindGliding");
+                    _gliding = false;
+                }
 
                 rigidbody.velocity = newVelocity;
             }
 
             var movement = new Vector3(inputH,move.y,inputV); 
 
-            //rigidbody.AddForce(Vector3.down * curGravityVel * Time.deltaTime, ForceMode.Acceleration);
             rigidbody.MovePosition(rigidbody.position + movement * Time.deltaTime * moveSpeed);
             
         }
@@ -144,6 +178,7 @@ namespace Player
             }
 
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+            _jumping = false;
             
             yield return null;
         }

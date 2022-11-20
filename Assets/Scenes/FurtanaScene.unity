@@ -858,10 +858,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartSound: Sound 1
-  StartSoundPlaying: 0
+  StartSoundPlaying: 1
   sounds:
   - name: Sound 1
-    clip: {fileID: 8300000, guid: 06d1b9913448d1c4383d5a5f31182530, type: 3}
+    clip: {fileID: 8300000, guid: bc7bab2890e5ae347977b03a855f5886, type: 3}
     volume: 0.1
     pitch: 1
     loop: 1
@@ -1076,6 +1076,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385993646736177627, guid: 8d5481f613c0e5c428fbc3fa68b70d9f,
+        type: 3}
+      propertyPath: dashDistance
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5385993646736177627, guid: 8d5481f613c0e5c428fbc3fa68b70d9f,
         type: 3}
