@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public bool seeing;
     [SerializeField] string[] dialogs;
     [SerializeField] TextMeshProUGUI manText;
+    
+    public AudioManager audioManager;
 
     public static GameManager Instance;
     // Start is called before the first frame update
@@ -136,6 +138,9 @@ public class GameManager : MonoBehaviour
         manText.text = dialogs[4];
 
         while (!Input.GetKeyDown(KeyCode.Space)) yield return null;
+        
+        audioManager.Stop("Chimes");
+        audioManager.Play("Musique");
 
         manText.text = "";
         icare.GetComponent<Player.Mouvement>().enabled = true;

@@ -17,6 +17,8 @@ namespace Player
         [SerializeField] private float dashDistance = 10f;
         
         [SerializeField] bool worldDir;
+
+        [SerializeField] private AudioManager _audioManager;
         
 
         [SerializeField] private float minHeight = 160f;
@@ -38,13 +40,9 @@ namespace Player
         
         private Vector3 _lastSafePosition;
 
-        private AudioManager _audioManager;
-
         private void Awake() {
             rigidbody = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
-            _audioManager = GetComponentInChildren<AudioManager>();
-            
             distToGround = 0f;
             // TODO : Modifier la valeur de DistToGround quand on aura le vrai personnage
         }

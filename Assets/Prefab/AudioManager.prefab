@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6439065637216754502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6439065637216754499}
+  - component: {fileID: 6439065637216754496}
+  - component: {fileID: 6439065637216754497}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6439065637216754499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439065637216754502}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -187.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6439065637216754496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439065637216754502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0515e6ef86d950b4cbe65c98d692d149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  copyTransform: 1
+--- !u!114 &6439065637216754497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6439065637216754502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f31276f4973702e448d6e34efb6abba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartSound: Chimes
+  StartSoundPlaying: 1
+  sounds:
+  - name: Chimes
+    clip: {fileID: 8300000, guid: 1aaa3193225c6de4aaaeb9b32861028a, type: 3}
+    volume: 0.161
+    pitch: 1
+    loop: 1
+  - name: Musique
+    clip: {fileID: 8300000, guid: 2adeb2d5da7d1854c8f516dc33f35264, type: 3}
+    volume: 0.04
+    pitch: 1
+    loop: 1
+  - name: Jump
+    clip: {fileID: 8300000, guid: 16ed844e0c846f845b4f8c923bbb96d1, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Glide
+    clip: {fileID: 8300000, guid: 8222ba3c6e5c8f0459c03cd0dd3484ef, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: WindGliding
+    clip: {fileID: 8300000, guid: 8302865dd441a3c44a792a2015922cf0, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 0
+  - name: Landing
+    clip: {fileID: 8300000, guid: 258c617b8f469464589bbd0f0af68529, type: 3}
+    volume: 0.24
+    pitch: 1
+    loop: 0
+  - name: Dash
+    clip: {fileID: 8300000, guid: 3a97936f1d917c048aaa44fbfc2d9905, type: 3}
+    volume: 0.24
+    pitch: 1
+    loop: 0
