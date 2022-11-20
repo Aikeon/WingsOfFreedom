@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         manText.text = "";
 
         menuCam.eulerAngles = new Vector3(-24,154.5f,0);
-        menuCam.position = new Vector3(-2.6f,24.5f,-2.5f);
+        menuCam.position = new Vector3(-2.6f,24.5f,-2.6f);
 
         int l = 0;
         while (l < dialogs[3].Length)

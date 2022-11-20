@@ -209,7 +209,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3236670918074690109}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3
@@ -230,6 +230,9 @@ MonoBehaviour:
   baseSpeed: 10
   speedCap: 25
   distMult: 3
+  endView: {fileID: 0}
+  endBackground: {fileID: 0}
+  endText: {fileID: 0}
 --- !u!1 &3236670918526711305
 GameObject:
   m_ObjectHideFlags: 0

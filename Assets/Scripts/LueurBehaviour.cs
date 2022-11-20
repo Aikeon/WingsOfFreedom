@@ -98,7 +98,7 @@ public class LueurBehaviour : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
         }
 
-        //CHANGER CAMERA POS Camera.main.position = ...;
+        //CHANGER CAMERA POS Camera.main.position = new Vector3(-2.6f,24.5f,-2.6f);
 
         yield return new WaitForSecondsRealtime(1f);
         

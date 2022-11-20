@@ -2419,8 +2419,8 @@ RectTransform:
   m_Father: {fileID: 1202333915}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.1, y: 0.5}
+  m_AnchorMax: {x: 0.9, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4297,6 +4297,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lueur
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236670918074690110, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
@@ -9021,7 +9026,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.5
+    Value: 0
     m_SpeedMode: 0
     m_MaxSpeed: 0
     m_AccelTime: 0.2
