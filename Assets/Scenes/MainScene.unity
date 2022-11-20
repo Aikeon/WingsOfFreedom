@@ -8585,7 +8585,7 @@ MonoBehaviour:
   gameCam: {fileID: 1963935862}
   lueur: {fileID: 381958773}
   icare: {fileID: 862799121}
-  debugMode: 1
+  debugMode: 0
   seeing: 0
   dialogs:
   - Oh, encore un autre...
