@@ -22,6 +22,7 @@ namespace PlateformGenerator
             public String functionUsedName;
             public float heightToChange;
             public float distance;
+            public GameObject structureToUse;
         }
         
         public List<PlateformType> listOfPlateformUsable;
@@ -92,12 +93,14 @@ namespace PlateformGenerator
         public void CreatePillar()
         {
             GameObject lastPillar = plateformsList.First();
-            GameObject go = GameObject.Instantiate(basicStructure, basicStructure.transform.parent);
             Vector3 newPosition = lastPosition;
             
-            // 
+            // Random For new plateform
             PlateformType newPlateformType = ShuffleForNewPillar();
 
+            // Instantiate good gameobject
+            GameObject go = GameObject.Instantiate(newPlateformType.structureToUse, newPlateformType.structureToUse.transform.parent);
+            
             // CALCULATE NEW POS
             newPosition.z += newPlateformType.distance;
             newPosition.y += newPlateformType.heightToChange;
