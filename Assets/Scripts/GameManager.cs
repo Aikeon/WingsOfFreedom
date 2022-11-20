@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] AnimationCurve yCurve;
-    [SerializeField] Transform menuCam;
-    [SerializeField] Transform gameCam;
-    [SerializeField] GameObject lueur;
-    [SerializeField] GameObject icare;
+    [SerializeField] public Transform menuCam;
+    [SerializeField] public Transform gameCam;
+    [SerializeField] public GameObject lueur;
+    [SerializeField] public GameObject icare;
     [SerializeField] bool debugMode;
     private Cinemachine.CinemachineFreeLook freelook;
     public bool seeing;

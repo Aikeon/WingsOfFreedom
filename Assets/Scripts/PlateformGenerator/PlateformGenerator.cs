@@ -29,6 +29,7 @@ namespace PlateformGenerator
         public List<PlateformType> listOfPlateformUsable;
         public float minHeight = -12.0f;
         public float maxHeight = 50.0f;
+        public float XBound;
         
         public int minOfPlateform = 10;
 
@@ -98,16 +99,20 @@ namespace PlateformGenerator
             // Set new X and Z pos
             double angle = random.Next(90) - 45;
 
-            angle = angle * (Math.PI / 180);
+            var dist = newPlateformType.distance * UnityEngine.Random.Range(0.7f,1.5f);
+
+            angle = (newPos.x + dist * (float) Math.Sin(angle) > XBound) ? Mathf.Asin((XBound - newPos.x)/dist): angle;
+            angle = (newPos.x + dist * (float) Math.Sin(angle) < -XBound) ? -Mathf.Asin((-XBound - newPos.x)/dist): angle;
+            angle *= Mathf.PI / 180;
 
             if (angle == 0)
             {
-                newPos.z += newPlateformType.distance;
+                newPos.z += dist;
             }
             else
             {
-                newPos.z += newPlateformType.distance * (float) Math.Cos(angle);
-                newPos.x += newPlateformType.distance * (float) Math.Sin(angle);
+                newPos.z += dist * (float) Math.Cos(angle);
+                newPos.x += dist * (float) Math.Sin(angle);
             }
             
 

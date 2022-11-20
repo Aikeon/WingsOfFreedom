@@ -1300,10 +1300,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2391,10 +2391,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2752,9 +2752,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 3
+  m_YDamping: 3
+  m_ZDamping: 3
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -2961,8 +2961,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4093,8 +4093,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -4667,7 +4667,7 @@ PrefabInstance:
     - target: {fileID: 3236670918074690049, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3236670918074690049, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
@@ -4712,7 +4712,7 @@ PrefabInstance:
     - target: {fileID: 3236670918074690110, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3236670918074690110, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
@@ -4742,7 +4742,12 @@ PrefabInstance:
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
       propertyPath: speedCap
-      value: 22
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
+        type: 3}
+      propertyPath: baseSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5847385687028177813, guid: 8f4a3ce079eb6f84688bc248e0f042ee,
         type: 3}
@@ -4947,6 +4952,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1320536196944146580, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320536196944146580, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1320536196944146580, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7440583577764909783, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: XBound
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7440583577807797430, guid: 451458f3dfa32db45b948f5234bc6ab4,
         type: 3}
       propertyPath: m_RootOrder
@@ -5006,6 +5031,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlateformGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639561788065257554, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452459248197216914, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8452459248197216914, guid: 451458f3dfa32db45b948f5234bc6ab4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 451458f3dfa32db45b948f5234bc6ab4, type: 3}
@@ -5819,10 +5859,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -8585,7 +8625,7 @@ MonoBehaviour:
   gameCam: {fileID: 1963935862}
   lueur: {fileID: 381958773}
   icare: {fileID: 862799121}
-  debugMode: 0
+  debugMode: 1
   seeing: 0
   dialogs:
   - Oh, encore un autre...
@@ -9017,10 +9057,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: icare
       objectReference: {fileID: 0}
+    - target: {fileID: 5385993646736177624, guid: 8d5481f613c0e5c428fbc3fa68b70d9f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 5385993646736177627, guid: 8d5481f613c0e5c428fbc3fa68b70d9f,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385993646736177627, guid: 8d5481f613c0e5c428fbc3fa68b70d9f,
+        type: 3}
+      propertyPath: dashDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5385993646736177627, guid: 8d5481f613c0e5c428fbc3fa68b70d9f,
         type: 3}
@@ -9193,7 +9243,7 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 1
+    m_WaitTime: 0.5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
@@ -9201,11 +9251,11 @@ MonoBehaviour:
   m_SplineCurvature: 0.2
   m_Orbits:
   - m_Height: 4.5
-    m_Radius: 1.75
+    m_Radius: 5
   - m_Height: 2.5
     m_Radius: 8
   - m_Height: 0.4
-    m_Radius: 1.3
+    m_Radius: 6.5
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 1934752793}

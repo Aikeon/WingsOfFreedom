@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LueurBehaviour : MonoBehaviour
 {
@@ -24,8 +25,8 @@ public class LueurBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var distSpeed = distMult / Vector3.Distance(transform.position, player.position);
-        var trueSpeed = Mathf.Min(baseSpeed * Time.deltaTime * distSpeed, speedCap);
+        var distSpeed = distMult / Mathf.Abs(transform.position.z - player.transform.position.z);
+        var trueSpeed = Mathf.Min(baseSpeed * Time.deltaTime * distSpeed, speedCap * Time.deltaTime);
         transform.position += Vector3.forward * trueSpeed;
         line1 = "A cet instant, il est bel et bien devenu l'homme le plus heureux du monde.";
         line2_1 = "Les rumeurs étaient donc vraies, mais";
@@ -55,10 +56,18 @@ public class LueurBehaviour : MonoBehaviour
             yield return null;
         }
 
-
+        GameManager.Instance.audioManager.Stop("Musique");
         endView.SetActive(true);
+        GameManager.Instance.icare.GetComponent<Player.Mouvement>().enabled = false;
+        GameManager.Instance.lueur.GetComponent<LueurBehaviour>().enabled = false;
 
-        yield return new WaitForSecondsRealtime(6f);
+        yield return new WaitForSecondsRealtime(3f);
+        GameManager.Instance.gameCam.gameObject.SetActive(false);
+        GameManager.Instance.menuCam.gameObject.SetActive(false);
+        GameManager.Instance.menuCam.gameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().Priority = 11;
+        GameManager.Instance.audioManager.Play("Chimes");
+        yield return new WaitForSecondsRealtime(3f);
+        GameManager.Instance.menuCam.gameObject.SetActive(true);
 
         int i = 0;
         while (i < line1.Length)
@@ -98,10 +107,14 @@ public class LueurBehaviour : MonoBehaviour
             yield return new WaitForSecondsRealtime(1f);
         }
 
-        //CHANGER CAMERA POS Camera.main.position = new Vector3(-2.6f,24.5f,-2.6f);
+        GameManager.Instance.menuCam.position = new Vector3(-2.6f,24.5f,-2.6f);
+        // Camera.main.transform.position = new Vector3(-2.6f,24.5f,-2.6f);
+        // Camera.main.transform.eulerAngles = GameManager.Instance.menuCam.eulerAngles;
 
         yield return new WaitForSecondsRealtime(1f);
         
+        Time.timeScale = 1;
+
         var timeEllapsed2 = 0f;
         while (timeEllapsed2 < 4f)
         {
@@ -121,6 +134,17 @@ public class LueurBehaviour : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
         }
 
-        //RETOUR ECRAN TITRE ?
+        yield return new WaitForSecondsRealtime(4f);
+        endText.text = "";
+        var lastSeconds = 0f;
+        while (lastSeconds < 4f)
+        {
+            GameManager.Instance.menuCam.position += Vector3.up * 0.5f * (1 + lastSeconds);
+            lastSeconds += Time.deltaTime;
+            yield return null;
+        }
+
+
+        SceneManager.LoadScene("MainScene");
     }
 }

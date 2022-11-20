@@ -22,14 +22,17 @@ namespace Player
         
 
         [SerializeField] private float minHeight = 160f;
+        [SerializeField] private float dashBaseCoolDown = 2f;
+        private float dashCoolDown;
 
         private float turnSmoothVel;
         private float distToGround;
         
         private float inputH;
         private float inputV;
+        private Vector3 move;
         private bool _isGrounded;
-        private bool _canDash;
+        private bool _dashing;
         private bool _gliding;
         private bool _jumping;
         private bool _landed;
@@ -50,13 +53,14 @@ namespace Player
         public void Update()
         {
 
-            _isGrounded = Physics.Raycast(transform.position + 0.01f * Vector3.up, -Vector3.up, distToGround + 0.1f);
+            _isGrounded = Physics.Raycast(transform.position + 0.01f * Vector3.up, -Vector3.up, out var hitInfo ,distToGround + 0.1f);
+            Debug.DrawRay(transform.position, - 0.1f * Vector3.up, Color.red, Mathf.Infinity);
             
             // Sauvegarde de la position du joueur si il est au sol
             if (_isGrounded)
             {
-                _lastSafePosition = transform.position;
-                _canDash = true;
+                if (Vector3.Distance(transform.position,hitInfo.collider.gameObject.transform.position + Vector3.up * hitInfo.collider.bounds.extents.y) < 10f) _lastSafePosition = hitInfo.collider.gameObject.transform.position + Vector3.up * hitInfo.collider.bounds.extents.y;
+                //_canDash = true;
                 if (_gliding)
                 {
                     _audioManager.Stop("WindGliding");
@@ -70,6 +74,8 @@ namespace Player
 
             }
 
+            move = Vector3.zero;
+
             _landed = !_isGrounded;
 
                 // Tp du joueur en sécurité si il est tombé trop bas
@@ -77,8 +83,6 @@ namespace Player
             {
                 transform.position = _lastSafePosition;
             }
-            
-            Vector3 move = Vector3.zero;
 
             if(Input.GetKey(KeyCode.Q))
             {
@@ -106,7 +110,7 @@ namespace Player
             animator.SetBool("Run", move != Vector3.zero);
             animator.SetBool("IsGrounded", _isGrounded);
 
-            if(move != Vector3.zero)
+            if(move != Vector3.zero && !_dashing)
             {
                 float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg;
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle + 180, ref turnSmoothVel, turnSmoothTime);
@@ -121,13 +125,15 @@ namespace Player
                 animator.SetTrigger("Jump");
             }
             
+            dashCoolDown -= Time.deltaTime;
             // Lancement du dash
-            if (Input.GetKeyDown(KeyCode.RightShift) && _canDash)
+            if (Input.GetKeyDown(KeyCode.RightShift) && dashCoolDown < 0)//&& _canDash)
             {
                 animator.SetTrigger("Dash");
                 StartCoroutine(Dash());
                 _audioManager.Play("Dash");
-                _canDash = false;
+                _dashing = true;
+
             }
 
             // Physique de la chute
@@ -151,13 +157,21 @@ namespace Player
                     _gliding = false;
                 }
 
-                rigidbody.velocity = newVelocity;
+                if (!_dashing) rigidbody.velocity = newVelocity;
             }
 
-            var movement = new Vector3(inputH,move.y,inputV); 
+            // var movement = new Vector3(inputH,move.y,inputV); 
 
-            rigidbody.MovePosition(rigidbody.position + movement * Time.deltaTime * moveSpeed);
+            // rigidbody.MovePosition(rigidbody.position + movement * Time.deltaTime * moveSpeed);
             
+        }
+
+        void FixedUpdate()
+        {
+            var movement = new Vector3(inputH,rigidbody.velocity.y / moveSpeed,inputV); 
+
+            // rigidbody.MovePosition(rigidbody.position + movement * Time.deltaTime * moveSpeed);
+            if (!_dashing) rigidbody.velocity = movement * moveSpeed;
         }
 
         IEnumerator Jump()
@@ -184,9 +198,10 @@ namespace Player
         IEnumerator Dash()
         {
             var dashProgress = 0f;
-
-            while (dashProgress < 0.5f)
+            while (dashProgress < 0.75f)
             {
+                dashCoolDown = dashBaseCoolDown;
+                if (dashProgress < 0.25f) {rigidbody.velocity = Vector3.zero; yield return null;}
                 var newVelocity = rigidbody.velocity;
 
                 var directions = new Vector2(
@@ -195,15 +210,16 @@ namespace Player
                 );
 
                 newVelocity = new Vector3(-directions.x * dashDistance * (1 - dashProgress) * (1 - dashProgress),
-                                            newVelocity.y, 
+                                            0,//newVelocity.y, 
                                             -directions.y * dashDistance * (1 - dashProgress) * (1 - dashProgress));
 
-                rigidbody.velocity = newVelocity;
+                rigidbody.velocity = moveSpeed * newVelocity;
                 dashProgress += Time.deltaTime;
                 yield return null;
 
             }
 
+            _dashing = false;
             rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
             yield return null;
         }
