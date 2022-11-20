@@ -22,17 +22,21 @@ namespace PlateformGenerator
             public String functionUsedName;
             public float heightToChange;
             public float distance;
+            public GameObject structureToUse;
         }
         
         public List<PlateformType> listOfPlateformUsable;
         public float minHeight = -12.0f;
         public float maxHeight = 50.0f;
+        
+        public int minOfPlateform = 10;
 
     // Start is called before the first frame update
         void Start()
         {
             plateformsList = new List<GameObject>();
             lastPosition = Vector3.zero;
+            InitFirstPillar();
         }
 
         private void Reset()
@@ -54,6 +58,11 @@ namespace PlateformGenerator
             
             go.SetActive(true);
             plateformsList.Add(go);
+
+            for (int i = 0; i < minOfPlateform; i++)
+            {
+                CreatePillar();
+            }
         }
         
         // Shuffle for a template of Pillar
@@ -67,7 +76,7 @@ namespace PlateformGenerator
                 i++;
                 if (i == 10)
                 {
-                    UnityEngine.Debug.Log("Hello, this is a fail");
+                    UnityEngine.Debug.Log("Hello, this is a fail. no possibility was found !");
                     return listOfPlateformUsable[0];
                 }
                 int index = random.Next(listOfPlateformUsable.Count);
@@ -77,33 +86,21 @@ namespace PlateformGenerator
                     && nextPlateform.heightToChange + lastPosition.y <= maxHeight) {
                     return listOfPlateformUsable[index];
                 }
-                else
-                {
-                    UnityEngine.Debug.Log("heightToChange " + nextPlateform.heightToChange + " lastPosition.y " + lastPosition.y);
-                    if (!(nextPlateform.heightToChange + lastPosition.y >= minHeight))
-                    {
-                        UnityEngine.Debug.Log("1 = " + (nextPlateform.heightToChange + lastPosition.y >= minHeight) + ", due to : " + "heightToChange " + nextPlateform.heightToChange + " lastPosition.y " + lastPosition.y + "!>= min height " + minHeight);
-
-                    }
-
-                    if (!(nextPlateform.heightToChange + lastPosition.y <= maxHeight))
-                    {
-                        UnityEngine.Debug.Log("2 = " + (nextPlateform.heightToChange + lastPosition.y <= maxHeight) + ", due to : " + "heightToChange " + nextPlateform.heightToChange + " lastPosition.y " + lastPosition.y + "!<= maxHeight " + maxHeight);
-                    }
-                }
             }
         }
             
         // Create a new Pillar
-        void CreatePillar()
+        public void CreatePillar()
         {
             GameObject lastPillar = plateformsList.First();
-            GameObject go = GameObject.Instantiate(basicStructure, basicStructure.transform.parent);
             Vector3 newPosition = lastPosition;
             
-            // 
+            // Random For new plateform
             PlateformType newPlateformType = ShuffleForNewPillar();
 
+            // Instantiate good gameobject
+            GameObject go = GameObject.Instantiate(newPlateformType.structureToUse, newPlateformType.structureToUse.transform.parent);
+            
             // CALCULATE NEW POS
             newPosition.z += newPlateformType.distance;
             newPosition.y += newPlateformType.heightToChange;
