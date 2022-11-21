@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         var dir = (icare.transform.position - lueur.transform.position).normalized;
-        freelook.m_XAxis.Value = Mathf.Asin(-dir.x)*Mathf.Rad2Deg + 180;
-        freelook.m_YAxis.Value = Mathf.Lerp(0,1,(3*dir.y+1)/2);
+        if (freelook != null) freelook.m_XAxis.Value = Mathf.Asin(-dir.x)*Mathf.Rad2Deg + 180;
+        if (freelook != null) freelook.m_YAxis.Value = Mathf.Lerp(0,1,(3*dir.y+1)/2);
     }
 
     // Update is called once per frame
